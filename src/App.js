@@ -1,25 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import { useSelector, useDispatch } from "react-redux";
+import {
+  increaseCoint,
+  decreaseCoint,
+  getLatestNews,
+} from "./redux/actions/actionsCreator";
 
-function App() {
+const App = () => {
+  const count = useSelector((store) => store?.counter.count);
+  const dispatch = useDispatch();
+
+  const handleIncrease = () => {
+    dispatch(increaseCoint());
+  };
+
+  const handleDecrease = () => {
+    dispatch(decreaseCoint());
+  };
+
+  const handleNews = () => {
+    dispatch(getLatestNews());
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <button onClick={handleIncrease}>+1</button>
+      <button onClick={handleDecrease}>-1</button>
+      <button onClick={handleNews}>getNews</button>
+      <h1>{count}</h1>
     </div>
   );
-}
+};
 
 export default App;
